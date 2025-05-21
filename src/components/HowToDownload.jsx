@@ -56,7 +56,7 @@ const steps = [
         {/* Common container with relative positioning */}
 
         <motion.img
-          src="https://cubanvr.com/wp-content/uploads/2023/07/ai-image-generators.webp"
+          src="first-image.webp"
           alt="Downloaded file 1"
           className="rounded-lg object-cover w-16 md:w-20 h-20 md:h-24 shadow absolute top-0 left-1/2 -translate-x-1/2"
           initial={{ x: 0, y: 0, rotate: 0, scale: 0.8, opacity: 0 }}
@@ -70,7 +70,7 @@ const steps = [
         />
 
         <motion.img
-          src="https://tse3.mm.bing.net/th?id=OIP.pXLuUPlyzNON5OxXfdUvHQHaHa&pid=Api&P=0&h=180"
+          src="second-image.jpeg"
           alt="Downloaded file 2"
           className="rounded-lg object-cover w-16 md:w-20 h-20 md:h-24 shadow absolute top-0 left-1/2 -translate-x-1/2"
           initial={{ x: 0, y: 0, rotate: 0, scale: 0.8, opacity: 0 }}
@@ -84,7 +84,7 @@ const steps = [
         />
 
         <motion.img
-          src="https://tse2.mm.bing.net/th?id=OIP.nURkWURpGxW7PqroM0dyNgHaJ4&pid=Api&P=0&h=180"
+          src="third-image.jpeg"
           alt="Downloaded file 3"
           className="rounded-lg object-cover w-16 md:w-20 h-20 md:h-24 shadow absolute top-0 left-1/2 -translate-x-1/2"
           initial={{ x: 0, y: 0, rotate: 0, scale: 0.8, opacity: 0 }}
