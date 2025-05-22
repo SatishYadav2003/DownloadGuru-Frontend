@@ -1,9 +1,7 @@
-"use client";
-
 import { motion } from "framer-motion";
-import { Download } from "lucide-react";
+import BlurryBallsBackground from "./BlurryBallsBackground";
 
-// Animation variants
+
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
   visible: (delay = 0) => ({
@@ -13,47 +11,10 @@ const fadeUp = {
   }),
 };
 
-// Subtle Blurry Background
-const FooterBlurryBackground = () => {
-  return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      <div className="absolute inset-0 bg-gradient-to-b from-blue-50 to-blue-100"></div>
-
-      <motion.div
-        className="absolute w-64 h-64 rounded-full bg-blue-300 opacity-10 blur-3xl"
-        initial={{ left: "10%", bottom: -30 }}
-        animate={{
-          left: ["10%", "15%", "5%"],
-          bottom: [-30, -20, -40],
-        }}
-        transition={{
-          duration: 15,
-          repeat: Infinity,
-          repeatType: "reverse",
-        }}
-      />
-
-      <motion.div
-        className="absolute w-80 h-80 rounded-full bg-blue-400 opacity-10 blur-3xl"
-        initial={{ right: "20%", bottom: -50 }}
-        animate={{
-          right: ["20%", "25%", "15%"],
-          bottom: [-50, -40, -60],
-        }}
-        transition={{
-          duration: 18,
-          repeat: Infinity,
-          repeatType: "reverse",
-        }}
-      />
-    </div>
-  );
-};
-
 const Footer = () => {
   return (
     <footer className="relative pt-16 pb-8 overflow-hidden">
-      <FooterBlurryBackground />
+      <BlurryBallsBackground />
 
       <div className="max-w-6xl mx-auto px-4 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-12 text-center">

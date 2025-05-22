@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
+import BlurryBallsBackground from "./BlurryBallsBackground";
 
 const FAQ = () => {
   const [openIndex, setOpenIndex] = useState(0);
@@ -89,38 +90,7 @@ const FAQ = () => {
 
   return (
     <section className="py-16 px-4 relative overflow-hidden" id="faq">
-      {/* Blurry Balls Background */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-blue-100"></div>
-
-        <motion.div
-          className="absolute w-72 h-72 rounded-full bg-blue-400 opacity-20 blur-3xl"
-          initial={{ x: -100, y: -100 }}
-          animate={{ x: [-100, 50, -50], y: [-100, 50, -50] }}
-          transition={{ duration: 20, repeat: Infinity, repeatType: "reverse" }}
-        />
-
-        <motion.div
-          className="absolute w-96 h-96 rounded-full bg-blue-500 opacity-20 blur-3xl"
-          initial={{ right: -100, top: 300 }}
-          animate={{ right: [-100, 50, -50], top: [300, 400, 350] }}
-          transition={{ duration: 25, repeat: Infinity, repeatType: "reverse" }}
-        />
-
-        <motion.div
-          className="absolute w-80 h-80 rounded-full bg-cyan-400 opacity-20 blur-3xl"
-          initial={{ left: "50%", bottom: -100 }}
-          animate={{ left: ["50%", "40%", "60%"], bottom: [-100, 50, -50] }}
-          transition={{ duration: 18, repeat: Infinity, repeatType: "reverse" }}
-        />
-
-        <motion.div
-          className="absolute w-64 h-64 rounded-full bg-blue-300 opacity-20 blur-3xl"
-          initial={{ right: "20%", top: "20%" }}
-          animate={{ right: ["20%", "25%", "15%"], top: ["20%", "25%", "15%"] }}
-          transition={{ duration: 15, repeat: Infinity, repeatType: "reverse" }}
-        />
-      </div>
+      <BlurryBallsBackground />
 
       {/* Main FAQ Content */}
       <div className="max-w-4xl mx-auto relative z-10">

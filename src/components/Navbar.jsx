@@ -2,34 +2,13 @@ import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
+import BlurryBallsBackground from "./BlurryBallsBackground";
 
 const navLinks = [
   { label: "How To Download ?", href: "/#how-to-download", type: "anchor" },
   { label: "Contact", href: "/contact", type: "route" },
   { label: "About", href: "/about", type: "route" },
 ];
-
-const NavbarBlurryBackground = () => {
-  return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      <div className="absolute inset-0 bg-gradient-to-r from-blue-50 to-blue-100 opacity-80"></div>
-
-      <motion.div
-        className="absolute w-40 h-40 rounded-full bg-blue-300 opacity-10 blur-3xl"
-        initial={{ left: "10%", top: -20 }}
-        animate={{ left: ["10%", "15%", "5%"], top: [-20, -10, -30] }}
-        transition={{ duration: 15, repeat: Infinity, repeatType: "reverse" }}
-      />
-
-      <motion.div
-        className="absolute w-40 h-40 rounded-full bg-blue-400 opacity-10 blur-3xl"
-        initial={{ right: "30%", top: -20 }}
-        animate={{ right: ["30%", "35%", "25%"], top: [-20, -10, -30] }}
-        transition={{ duration: 18, repeat: Infinity, repeatType: "reverse" }}
-      />
-    </div>
-  );
-};
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -69,7 +48,7 @@ function Navbar() {
 
   return (
     <div className="bg-blue-50/80 backdrop-blur-[0.5px] py-5 shadow-md w-full sticky top-0 z-50">
-      <NavbarBlurryBackground />
+      <BlurryBallsBackground />
 
       <div className="mx-auto flex items-center px-4 justify-between relative z-10">
         {/* Logo */}

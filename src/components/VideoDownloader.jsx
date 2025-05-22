@@ -1,7 +1,8 @@
-import { useRef } from "react"
-import { motion, useInView } from "framer-motion"
-import { ClipboardCopy, Download } from "lucide-react"
-import { FaFacebook, FaInstagram, FaYoutube, FaTiktok } from "react-icons/fa"
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import { ClipboardCopy, Download } from "lucide-react";
+import { FaFacebook, FaInstagram, FaYoutube, FaTiktok } from "react-icons/fa";
+import BlurryBallsBackground from "./BlurryBallsBackground";
 
 const resources = [
   {
@@ -20,113 +21,17 @@ const resources = [
     icon: <FaYoutube className="text-red-500" />,
     url: "#",
   },
-]
-
-// Blurry Ball Background Component
-const BlurryBallsBackground = () => {
-  return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {/* Large blue gradient in the background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-blue-100"></div>
-
-      {/* Blurry balls/spheres */}
-      <motion.div
-        className="absolute w-72 h-72 rounded-full bg-blue-400 opacity-20 blur-3xl"
-        initial={{ x: -100, y: -100 }}
-        animate={{
-          x: [-100, 50, -50],
-          y: [-100, 50, -50],
-        }}
-        transition={{
-          duration: 20,
-          repeat: Number.POSITIVE_INFINITY,
-          repeatType: "reverse",
-        }}
-      />
-
-      <motion.div
-        className="absolute w-96 h-96 rounded-full bg-blue-500 opacity-20 blur-3xl"
-        initial={{ right: -100, top: 300 }}
-        animate={{
-          right: [-100, 50, -50],
-          top: [300, 400, 350],
-        }}
-        transition={{
-          duration: 25,
-          repeat: Number.POSITIVE_INFINITY,
-          repeatType: "reverse",
-        }}
-      />
-
-      <motion.div
-        className="absolute w-80 h-80 rounded-full bg-cyan-400 opacity-20 blur-3xl"
-        initial={{ left: "50%", bottom: -100 }}
-        animate={{
-          left: ["50%", "40%", "60%"],
-          bottom: [-100, 50, -50],
-        }}
-        transition={{
-          duration: 18,
-          repeat: Number.POSITIVE_INFINITY,
-          repeatType: "reverse",
-        }}
-      />
-
-      <motion.div
-        className="absolute w-64 h-64 rounded-full bg-blue-300 opacity-20 blur-3xl"
-        initial={{ right: "20%", top: "20%" }}
-        animate={{
-          right: ["20%", "25%", "15%"],
-          top: ["20%", "25%", "15%"],
-        }}
-        transition={{
-          duration: 15,
-          repeat: Number.POSITIVE_INFINITY,
-          repeatType: "reverse",
-        }}
-      />
-
-      {/* Small floating particles */}
-      {[...Array(10)].map((_, i) => (
-        <motion.div
-          key={i}
-          className="absolute w-4 h-4 rounded-full bg-blue-200 opacity-70 blur-sm"
-          initial={{
-            x: Math.random() * window.innerWidth,
-            y: Math.random() * window.innerHeight,
-          }}
-          animate={{
-            x: [
-              Math.random() * window.innerWidth,
-              Math.random() * window.innerWidth,
-              Math.random() * window.innerWidth,
-            ],
-            y: [
-              Math.random() * window.innerHeight,
-              Math.random() * window.innerHeight,
-              Math.random() * window.innerHeight,
-            ],
-          }}
-          transition={{
-            duration: 20 + Math.random() * 10,
-            repeat: Number.POSITIVE_INFINITY,
-            repeatType: "reverse",
-          }}
-        />
-      ))}
-    </div>
-  )
-}
+];
 
 function VideoDownloader() {
-  const mainRef = useRef(null)
-  const supportRef = useRef(null)
+  const mainRef = useRef(null);
+  const supportRef = useRef(null);
 
-  const isMainInView = useInView(mainRef, { once: true, margin: "-100px" })
+  const isMainInView = useInView(mainRef, { once: true, margin: "-100px" });
   const isSupportInView = useInView(supportRef, {
     once: true,
     margin: "-100px",
-  })
+  });
 
   const bottomToTop = {
     hidden: { opacity: 0, y: 40 },
@@ -135,7 +40,7 @@ function VideoDownloader() {
       y: 0,
       transition: { type: "spring", stiffness: 100, damping: 20 },
     },
-  }
+  };
 
   // Supported platforms fade in with slight upward move & delay
   const fadeUpDelayed = {
@@ -145,10 +50,13 @@ function VideoDownloader() {
       y: 0,
       transition: { delay: 0.3, duration: 0.6, ease: "easeOut" },
     },
-  }
+  };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-blue-50 p-4 relative overflow-hidden pt-10" id="videoDownload">
+    <div
+      className="min-h-screen flex flex-col items-center justify-center bg-blue-50 p-4 relative overflow-hidden pt-10"
+      id="videoDownload"
+    >
       {/* Add the blurry balls background */}
       <BlurryBallsBackground />
 
@@ -168,7 +76,9 @@ function VideoDownloader() {
           Free Online Video Downloader
         </h1>
 
-        <p className="text-lg text-gray-700 text-center">Download Photo & Video and save from any website.</p>
+        <p className="text-lg text-gray-700 text-center">
+          Download Photo & Video and save from any website.
+        </p>
 
         <form className="w-full flex flex-col sm:flex-row gap-3">
           <div className="relative flex-1">
@@ -190,7 +100,9 @@ function VideoDownloader() {
         </form>
 
         <div className="w-full mt-4 p-4 bg-blue-50 rounded-xl border border-blue-300">
-          <h3 className="text-sm font-medium text-blue-800 mb-2">How it works:</h3>
+          <h3 className="text-sm font-medium text-blue-800 mb-2">
+            How it works:
+          </h3>
           <ol className="text-sm text-gray-700 list-decimal pl-4 space-y-1">
             <li>Paste the URL of the video you want to download</li>
             <li>Click the Download button and wait for processing</li>
@@ -220,7 +132,9 @@ function VideoDownloader() {
         initial="hidden"
         animate={isSupportInView ? "visible" : "hidden"}
       >
-        <span className="text-base font-semibold text-blue-700 mb-4">Supported Platforms</span>
+        <span className="text-base font-semibold text-blue-700 mb-4">
+          Supported Platforms
+        </span>
         <div className="flex flex-wrap justify-center gap-4">
           {resources.map((res) => (
             <a
@@ -235,7 +149,7 @@ function VideoDownloader() {
         </div>
       </motion.div>
     </div>
-  )
+  );
 }
 
-export default VideoDownloader
+export default VideoDownloader;
