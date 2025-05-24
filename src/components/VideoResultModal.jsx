@@ -3,6 +3,10 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import formatDuration from "../../utility/formatDuration";
 import formatSize from "../../utility/formatSize";
+import {
+  VITE_NODE_BACKEND_BASE_URL,
+  VITE_PYTHON_BACKEND_BASE_URL,
+} from "../../config/configuration.js";
 
 const VideoResultModal = ({ data, onClose }) => {
   if (!data) return null;
@@ -65,12 +69,11 @@ const VideoResultModal = ({ data, onClose }) => {
     if (!canDownload) return;
 
     if (selectedMuxed) {
-      const baseUrl = import.meta.env.VITE_NODE_BACKEND_BASE_URL;
       const videoUrl = encodeURIComponent(selectedMuxed.url);
       const extension = encodeURIComponent(selectedMuxed.ext || "mp4");
       const safeTitle = encodeURIComponent(title || "video");
 
-      const downloadUrl = `${baseUrl}/api/download_video?videoUrl=${videoUrl}&title=${safeTitle}&extension=${extension}`;
+      const downloadUrl = `${VITE_NODE_BACKEND_BASE_URL}/api/download_video?videoUrl=${videoUrl}&title=${safeTitle}&extension=${extension}`;
 
       const link = document.createElement("a");
       link.href = downloadUrl;
@@ -81,7 +84,7 @@ const VideoResultModal = ({ data, onClose }) => {
     } else if (selectedVideo && selectedAudio) {
       try {
         const response = await axios.post(
-          `${import.meta.env.VITE_PYTHON_BACKEND_BASE_URL}/api/merge_download`,
+          `${VITE_PYTHON_BACKEND_BASE_URL}/api/merge_download`,
           {
             video_url: selectedVideo.url,
             audio_url: selectedAudio.url,

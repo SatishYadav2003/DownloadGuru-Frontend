@@ -6,6 +6,7 @@ import BlurryBallsBackground from "./BlurryBallsBackground";
 import toast from "react-hot-toast";
 import axios from "axios";
 import VideoResultModal from "./VideoResultModal";
+import { VITE_PYTHON_BACKEND_BASE_URL } from "../../config/configuration.js";
 
 const resources = [
   {
@@ -80,7 +81,7 @@ function VideoDownloader() {
 
     try {
       const res = await axios.post(
-        `${import.meta.env.VITE_PYTHON_BACKEND_BASE_URL}/api/download`,
+        `${VITE_PYTHON_BACKEND_BASE_URL}/api/download`,
         {
           url,
         }
