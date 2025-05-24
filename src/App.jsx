@@ -6,7 +6,8 @@ import HowToDownload from "./components/HowToDownload";
 import Navbar from "./components/Navbar";
 import VideoDownloader from "./components/VideoDownloader";
 import WebsiteFeature from "./components/WebsiteFeature";
-import Contact from "./components/Contact"
+import Contact from "./components/Contact";
+import { Toaster } from "react-hot-toast";
 
 const Home = () => (
   <>
@@ -21,11 +22,14 @@ const Home = () => (
 
 const App = () => {
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/about" element={<About />} />
-      <Route path="/contact" element={<Contact />} />
-    </Routes>
+    <>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+      </Routes>
+      <Toaster />
+    </>
   );
 };
 

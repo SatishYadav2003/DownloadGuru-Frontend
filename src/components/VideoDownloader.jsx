@@ -1,8 +1,11 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { ClipboardCopy, Download } from "lucide-react";
 import { FaFacebook, FaInstagram, FaYoutube, FaTiktok } from "react-icons/fa";
 import BlurryBallsBackground from "./BlurryBallsBackground";
+import toast from "react-hot-toast";
+import axios from "axios";
+import VideoResultModal from "./VideoResultModal";
 
 const resources = [
   {
@@ -26,6 +29,9 @@ const resources = [
 function VideoDownloader() {
   const mainRef = useRef(null);
   const supportRef = useRef(null);
+  const [url, setUrl] = useState("");
+  const [resultData, setResultData] = useState(null);
+  const [showModal, setShowModal] = useState(false);
 
   const isMainInView = useInView(mainRef, { once: true, margin: "-100px" });
   const isSupportInView = useInView(supportRef, {
@@ -42,7 +48,6 @@ function VideoDownloader() {
     },
   };
 
-  // Supported platforms fade in with slight upward move & delay
   const fadeUpDelayed = {
     hidden: { opacity: 0, y: 20 },
     visible: {
@@ -50,6 +55,45 @@ function VideoDownloader() {
       y: 0,
       transition: { delay: 0.3, duration: 0.6, ease: "easeOut" },
     },
+  };
+
+  const isValidYouTubeUrl = (link) => {
+    const pattern =
+      /^(https?:\/\/)?(www\.)?(youtube\.com\/watch\?v=|youtu\.be\/)[\w-]{11}/;
+    return pattern.test(link);
+  };
+
+  const handleDownload = async (e) => {
+    e.preventDefault();
+
+    if (!url.trim()) {
+      toast.error("Please enter a valid URL.");
+      return;
+    }
+
+    if (!isValidYouTubeUrl(url)) {
+      toast.error("Please enter a valid YouTube link.");
+      return;
+    }
+
+    toast.loading("Processing link...", { id: "loader" });
+
+    try {
+      const res = await axios.post(
+        `${import.meta.env.VITE_PYTHON_BACKEND_BASE_URL}/api/download`,
+        {
+          url,
+        }
+      );
+
+      toast.success("Download link generated!", { id: "loader" });
+      console.log("Response:", res.data);
+      setResultData(res.data); // store response
+      setShowModal(true);
+    } catch (err) {
+      toast.error("Failed to process the video.", { id: "loader" });
+      console.error(err);
+    }
   };
 
   return (
@@ -80,7 +124,10 @@ function VideoDownloader() {
           Download Photo & Video and save from any website.
         </p>
 
-        <form className="w-full flex flex-col sm:flex-row gap-3">
+        <form
+          className="w-full flex flex-col sm:flex-row gap-3"
+          onSubmit={handleDownload}
+        >
           <div className="relative flex-1">
             <span className="absolute inset-y-0 left-0 flex items-center pl-3">
               <ClipboardCopy className="text-blue-600" size={22} />
@@ -88,6 +135,7 @@ function VideoDownloader() {
             <input
               type="text"
               placeholder="Paste the Link here"
+              onChange={(e) => setUrl(e.target.value)}
               className="w-full pl-10 pr-4 py-3 rounded-xl border border-blue-300 bg-white focus:ring-2 focus:ring-blue-400 focus:outline-none text-gray-900 transition"
             />
           </div>
@@ -148,6 +196,12 @@ function VideoDownloader() {
           ))}
         </div>
       </motion.div>
+      {showModal && (
+        <VideoResultModal
+          data={resultData}
+          onClose={() => setShowModal(false)}
+        />
+      )}
     </div>
   );
 }
